@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Name my town!</title>
+        <link rel= "stylesheet" type= "text/css" href="{{ url_for('styles',filename='mainpage.css') }}">
+    </head>
+    <body>
+    <div>
+    <form action="" method="get" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.prompt.label }}<br>
+            {{ form.prompt(size=32) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    </div>
+    <ul>
+    {% for town in placeholder : %}
+        <li class="list-group-item">{{ town }}</li>
+    {% endfor %}
+    </ul>
+    </body>
+</html>
