@@ -9,8 +9,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField
 
 
 def fetch_list(url):
@@ -87,7 +86,7 @@ def generate_n_towns(prompt, n=10, probabilistic=True, creativity=2):
     return new_towns
 
 
-app = Flask(__name__)
+app = Flask("namemytown")
 app.config.from_object(Config)
 
 

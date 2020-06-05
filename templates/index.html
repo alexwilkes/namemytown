@@ -1,10 +1,24 @@
 <html>
-    <head>
-        <title>Name my town!</title>
-        <link rel= "stylesheet" type= "text/css" href="{{ url_for('styles',filename='mainpage.css') }}">
-    </head>
-    <body>
-    <div>
+<head>
+    <title>Name my town!</title>
+    <style>
+            body {background-color: B0E0E6; text-align: center; font-family: Trebuchet MS}
+            ul {list-style-type: none; margin-left: -40px;}
+            input[type=text] {
+              padding: 0;
+              width: 100px;
+              height: 30px;
+              outline: none;
+              border: 1px solid #cdcdcd;
+              border-color: rgba(0, 0, 0, .15);
+              background-color: white;
+              font-size: 16px;
+              text-align: center;
+            }
+    </style>
+</head>
+<body>
+<div>
     <form action="" method="get" novalidate>
         {{ form.hidden_tag() }}
         <p>
@@ -13,11 +27,11 @@
         </p>
         <p>{{ form.submit() }}</p>
     </form>
-    </div>
-    <ul>
+</div>
+<ul>
     {% for town in placeholder : %}
-        <li class="list-group-item">{{ town }}</li>
+    <li class="list-group-item">{{ town }}</li>
     {% endfor %}
-    </ul>
-    </body>
+</ul>
+</body>
 </html>
