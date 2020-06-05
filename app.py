@@ -1,4 +1,5 @@
-from flask import Flask, request
+from config import Config
+from flask import Flask, request, render_template
 import requests
 import pandas as pd
 import numpy as np
@@ -6,6 +7,10 @@ from bs4 import BeautifulSoup
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
+
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import DataRequired
 
 
 def fetch_list(url):
@@ -83,13 +88,36 @@ def generate_n_towns(prompt, n=10, probabilistic=True, creativity=2):
 
 
 app = Flask(__name__)
+app.config.from_object(Config)
+
+
+def get_prompt_suggestion():
+    return np.random.choice(towns)[0:3]
+
+
+class promptForm(FlaskForm):
+    prompt = StringField("It works best when you give it a few letters to start with...")
+    submit = SubmitField('Now name my town!')
+
+
+def pad_left(prompt):
+    if len(prompt) >= 3:
+        return prompt
+    else:
+        return ("1" * (3-len(prompt))) + prompt
 
 
 # The only page we serve
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
     prompt = request.args.get('prompt')
-    return str(generate_n_towns(prompt=prompt))
+    print(prompt)
+    if prompt is None:
+        placeholder = set()
+    else:
+        placeholder = generate_n_towns(pad_left(prompt))
+    form = promptForm()
+    return render_template('index.html', title='Name my town', form=form, placeholder=placeholder)
 
 
 if __name__ == '__main__':
