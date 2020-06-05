@@ -89,7 +89,7 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     prompt = request.args.get('prompt')
-    return str(generate_n_towns(prompt="Cam"))
+    return str(generate_n_towns(prompt=prompt))
 
 
 if __name__ == '__main__':
