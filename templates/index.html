@@ -26,10 +26,13 @@
     <form action="" method="get" novalidate>
         {{ form.hidden_tag() }}
         <p>
-            {{ form.prompt.label }}<br>
+            {{ form.prompt.label }}
             {{ form.prompt(size=32) }}
         </p>
-        <p>{{ form.submit() }}</p>
+        <p>
+            {{ form.country }}
+        </p>
+        <p>{{ form.submit_england() }} &nbsp; {{ form.submit_us() }}</p>
     </form>
 </div>
 <div class="c">
@@ -41,11 +44,11 @@
 <hr>
 <div>
 <p class="q">How does this work?</p>
-<p>New town names are built left-to-right using a <a href="https://en.wikipedia.org/wiki/Random_forest">Random Forests</a> classifier that predicts the next letter based on the previous three letters. Within each iteration, it chooses the next letter from a probability distribution that is weighted by the votes of the Random Forest ensemble. As well as another letter, this process can also predict that the town name should terminate.
+<p>New town names are built left-to-right using a <a href="https://en.wikipedia.org/wiki/Random_forest">Random Forests</a> classifier that predicts the next letter based on the previous three letters. Within each iteration, it chooses the next letter from a probability distribution that is weighted by the votes of the Random Forest ensemble. As well as another letter, this process can also predict that the town name should terminate. Two separate models are trained for US cities and English cities.
 <p class="q">How was it trained?</p>
-<p>Data was scraped from the <a href="https://simple.wikipedia.org/wiki/List_of_cities_and_towns_in_England">List of cities and towns in England</a> wikipedia article.</p>
+    <p>Data was scraped from the <a href="https://simple.wikipedia.org/wiki/List_of_cities_and_towns_in_England">List of cities and towns in England</a> wikipedia article and <a href="https://www.britannica.com/topic/list-of-cities-and-towns-in-the-United-States-2023068">Britannica</a> list of US towns and cities.</p>
 <p class="q">Can I see the code?</p>
-<p>The code is written in Python and lives in <a href="https://github.com/alexwilkes/namemytown">this Github Repository.</a></p>
+<p>The code is written in Python and lives in <a href="https://github.com/alexwilkes/namemytown">this Github Repository</a>.</p>
 </div>
 </body>
 </html>

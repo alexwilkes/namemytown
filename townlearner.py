@@ -16,10 +16,12 @@ def list_as_string(l: list):
 
 
 class TownLearner:
-    def __init__(self, towns, clf = RandomForestClassifier()):
+    def __init__(self, towns):
         self.towns_list = towns
-        self.clf = clf
+        self.clf = RandomForestClassifier()
         self.is_trained = False
+        self.le = LabelEncoder()
+        self.train_data = pd.DataFrame()
 
     def create_training_data(self, towns: list) -> list:
         train = []
@@ -36,13 +38,12 @@ class TownLearner:
                 train.append((town[i + 3], town[i], town[i + 1], town[i + 2]))
 
             # Finally we record how the word ends in the training data
-            train.append(("2", town[-3], town[-2], town[-1]))  #2s represent words terminating
+            train.append(("2", town[-3], town[-2], town[-1]))  # 2s represent words terminating
 
         cols = ["target", "minus3", "minus2", "minus1"]
         self.train_data = pd.DataFrame(np.array(train), columns=cols)
 
         # Encode the letters as integers
-        self.le = LabelEncoder()
         self.le.fit(pd.concat([
             self.train_data["target"],
             self.train_data["minus3"],

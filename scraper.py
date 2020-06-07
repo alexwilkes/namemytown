@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def fetch_list(url):
+def fetch_list_england(url):
     page = requests.get(url).text
     soup = BeautifulSoup(page, "lxml")
     candidates = soup.findAll("a")  # All the cities are hyperlinks which we use to find them
@@ -22,6 +22,14 @@ def fetch_list(url):
 
 english_towns_url = "https://simple.wikipedia.org/wiki/List_of_cities_and_towns_in_England"
 
-if __name__ == "__main__":
-    with open('englishtowns.p', 'wb') as f:
-        pickle.dump(fetch_list(english_towns_url), f)
+
+def fetch_data_us(url):
+    page = requests.get(url).text
+    soup = BeautifulSoup(page, "lxml")
+    statelists = [state.findAll("a") for state in soup.findAll("ul", {"class": "topic-list"})]
+
+    return [city.text for statelist in statelists for city in statelist]
+
+
+us_towns_url = "https://www.britannica.com/topic/list-of-cities-and-towns-in-the-United-States-2023068"
+
