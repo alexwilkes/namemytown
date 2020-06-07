@@ -45,7 +45,16 @@
 <div>
 <p class="q">How does this work?</p>
 <p>New town names are built left-to-right using a <a href="https://en.wikipedia.org/wiki/Random_forest">Random Forests</a> classifier that predicts the next letter based on the previous three letters. Within each iteration, it chooses the next letter from a probability distribution that is weighted by the votes of the Random Forest ensemble. As well as another letter, this process can also predict that the town name should terminate. Separate models are trained for different countries.
-<p class="q">What data was it trained on?</p>
+<p class="q">What other countries exist?</p>
+    <p>
+    <ul>
+        <a href="http://namemytown.heroku.com">Name my English Town!</a>
+        <a href="http://namemygermantown.heroku.com">Name my German Town!</a>
+        <a href="http://namemyfrenchtown.heroku.com">Name my French Town!</a>
+        <a href="http://namemyamericantown.heroku.com">Name my American Town!</a>
+    </ul>
+</p>
+    <p class="q">What data was it trained on?</p>
     <p>Data was scraped from the <a href="https://simple.wikipedia.org/wiki/List_of_cities_and_towns_in_England">List of cities and towns in England</a> wikipedia article, the <a href="https://en.wikipedia.org/wiki/List_of_cities_and_towns_in_Germany">list of cities and towns in Germany</a>, the <a href="https://www.britannica.com/topic/list-of-cities-and-towns-in-the-United-States-2023068">Britannica list of US towns and cities</a> and <a href="https://www.britannica.com/topic/list-of-cities-and-towns-in-France-2039172">Britannica list of cities and towns in France</a>.</p>
 <p class="q">Can I see the code?</p>
 <p>The code is written in Python and lives in <a href="https://github.com/alexwilkes/namemytown">this Github Repository</a>.</p>
