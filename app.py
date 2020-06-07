@@ -1,8 +1,8 @@
 from config import Config
 from flask import Flask, request, render_template
-
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, RadioField
+import os
+from wtforms import StringField, SubmitField
 
 from townlearner import TownLearner
 from scraper import (
@@ -71,7 +71,7 @@ def home():
         placeholder = set()
 
     form = PromptForm()
-    return render_template('index.html', title='Name my town', form=form, placeholder=placeholder)
+    return render_template('index.html', title='Name my town', form=form, placeholder=placeholder, country=os.environ["COUNTRY"])
 
 
 if __name__ == '__main__':
