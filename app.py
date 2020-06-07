@@ -37,17 +37,17 @@ def pad_left(prompt):
 
 
 # Train the english town names model
-english_town_names = fetch_list_england(english_towns_url)
-english = TownLearner(english_town_names)
-english.fit()
-
-us_town_names = fetch_data_britannica(us_towns_url)
-us = TownLearner(us_town_names)
-us.fit()
-
-france_town_names = fetch_data_britannica(france_towns_url)
-france = TownLearner(france_town_names)
-france.fit()
+# english_town_names = fetch_list_england(english_towns_url)
+# english = TownLearner(english_town_names)
+# english.fit()
+#
+# us_town_names = fetch_data_britannica(us_towns_url)
+# us = TownLearner(us_town_names)
+# us.fit()
+#
+# france_town_names = fetch_data_britannica(france_towns_url)
+# france = TownLearner(france_town_names)
+# france.fit()
 
 germany_town_names = fetch_list_germany(germany_towns_url)
 germany = TownLearner(germany_town_names)
