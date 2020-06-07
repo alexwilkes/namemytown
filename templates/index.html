@@ -2,7 +2,7 @@
 <head>
     <title>Name my town!</title>
     <style>
-            body {background-color: B0E0E6; text-align: center; font-family: Trebuchet MS}
+            body {background-color: B0E0E6; font-family: Trebuchet MS}
             ul {list-style-type: none; margin-left: -40px;}
             input[type=text] {
               padding: 0;
@@ -15,10 +15,14 @@
               font-size: 16px;
               text-align: center;
             }
+            .c {text-align:center}
+            .q {font-weight:bold}
+            .title {font-size: x-large; text-align:center}
     </style>
 </head>
 <body>
-<div>
+<div class="title">What should I name my town?</div>
+<div class="c">
     <form action="" method="get" novalidate>
         {{ form.hidden_tag() }}
         <p>
@@ -28,10 +32,20 @@
         <p>{{ form.submit() }}</p>
     </form>
 </div>
+<div class="c">
 <ul>
     {% for town in placeholder : %}
     <li class="list-group-item">{{ town }}</li>
     {% endfor %}
-</ul>
+</ul></div>
+<hr>
+<div>
+<p class="q">How does this work?</p>
+<p>New town names are built left-to-right using a <a href="https://en.wikipedia.org/wiki/Random_forest">Random Forests</a> classifier that predicts the next letter based on the previous three letters. Within each iteration, it chooses the next letter from a probability distribution that is weighted by the votes of the Random Forest ensemble. As well as another letter, this process can also predict that the town name should terminate.
+<p class="q">How was it trained?</p>
+<p>Data was scraped from the <a href="https://simple.wikipedia.org/wiki/List_of_cities_and_towns_in_England">List of cities and towns in England</a> wikipedia article.</p>
+<p class="q">Can I see the code?</p>
+<p>The code is written in Python and lives in <a href="https://github.com/alexwilkes/namemytown">this Github Repository.</a></p>
+</div>
 </body>
 </html>
