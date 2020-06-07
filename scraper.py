@@ -17,8 +17,6 @@ def fetch_list(url):
     dropwords = ("change", "change source")  # Other hyperlinks we want to drop
     filtered = [str(town) for town in filtered[abingdon:yoxall + 1] if str(town) not in dropwords]
 
-    print(filtered)
-
     return filtered
 
 

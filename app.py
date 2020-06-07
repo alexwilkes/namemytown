@@ -25,6 +25,12 @@ def pad_left(prompt):
         return ("1" * (3-len(prompt))) + prompt
 
 
+# Train the english town names model
+english_town_names = fetch_list(english_towns_url)
+english = TownLearner(english_town_names)
+english.fit()
+
+
 # The only page we serve
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -39,9 +45,5 @@ def home():
 
 
 if __name__ == '__main__':
-    english_town_names = fetch_list(english_towns_url)
-    english = TownLearner(english_town_names)
-    english.fit()
-
     # Threaded option to enable multiple instances for multiple user access support
     app.run(threaded=True, port=5000)
