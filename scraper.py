@@ -23,7 +23,33 @@ def fetch_list_england(url):
 english_towns_url = "https://simple.wikipedia.org/wiki/List_of_cities_and_towns_in_England"
 
 
-def fetch_data_us(url):
+def drop_brackets(s):
+    idx = s.find("(")
+    if idx > -1:
+        return s[:idx-1]
+
+
+def fetch_list_germany(url):
+    page = requests.get(url).text
+    soup = BeautifulSoup(page, "lxml")
+    candidates = soup.findAll("li")  # All the cities are hyperlinks which we use to find them
+
+    # Candidate towns are those with more than three letters
+    filtered = [candidate.text for candidate in candidates if len(candidate.text) > 3]
+
+    first = filtered.index("Aach (Baden-Württemberg)")
+    last = filtered.index("Zwönitz (Saxony)")
+    filtered = [drop_brackets(str(town)) for town in filtered[first:last + 1]]
+
+    return filtered
+
+
+germany_towns_url = "https://en.wikipedia.org/wiki/List_of_cities_and_towns_in_Germany"
+
+fetch_list_germany(germany_towns_url)
+
+
+def fetch_data_britannica(url):
     page = requests.get(url).text
     soup = BeautifulSoup(page, "lxml")
     statelists = [state.findAll("a") for state in soup.findAll("ul", {"class": "topic-list"})]
@@ -32,4 +58,5 @@ def fetch_data_us(url):
 
 
 us_towns_url = "https://www.britannica.com/topic/list-of-cities-and-towns-in-the-United-States-2023068"
+france_towns_url = "https://www.britannica.com/topic/list-of-cities-and-towns-in-France-2039172"
 
