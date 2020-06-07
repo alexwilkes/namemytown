@@ -32,7 +32,7 @@
         <p>
             {{ form.country }}
         </p>
-        <p>{{ form.submit_england() }} {{ form.submit_us() }} {{ form.submit_france() }} {{ form.submit_germany() }}</p>
+        <p>{{ form.submit() }}</p>
     </form>
 </div>
 <div class="c">
@@ -49,7 +49,6 @@
     <p>Data was scraped from the <a href="https://simple.wikipedia.org/wiki/List_of_cities_and_towns_in_England">List of cities and towns in England</a> wikipedia article, the <a href="https://en.wikipedia.org/wiki/List_of_cities_and_towns_in_Germany">list of cities and towns in Germany</a>, the <a href="https://www.britannica.com/topic/list-of-cities-and-towns-in-the-United-States-2023068">Britannica list of US towns and cities</a> and <a href="https://www.britannica.com/topic/list-of-cities-and-towns-in-France-2039172">Britannica list of cities and towns in France</a>.</p>
 <p class="q">Can I see the code?</p>
 <p>The code is written in Python and lives in <a href="https://github.com/alexwilkes/namemytown">this Github Repository</a>.</p>
-<p>{{ country }}</p>
 </div>
 </body>
 </html>
