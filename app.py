@@ -81,7 +81,7 @@ def home():
         placeholder = set()
 
     form = PromptForm()
-    return render_template('/home/alexwilkes/namemytown/index.html', title='Name my town', form=form, placeholder=placeholder)
+    return render_template('/home/alexwilkes/namemytown/templates/index.html', title='Name my town', form=form, placeholder=placeholder)
 
 
 if __name__ == '__main__':
