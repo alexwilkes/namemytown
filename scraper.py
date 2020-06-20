@@ -59,3 +59,8 @@ def fetch_data_britannica(url, get_fresh=False):
 us_towns_url = "https://www.britannica.com/topic/list-of-cities-and-towns-in-the-United-States-2023068"
 france_towns_url = "https://www.britannica.com/topic/list-of-cities-and-towns-in-France-2039172"
 
+
+def read_local_list(country):
+    with open(main_path+"/townlists/"+country+".txt", "r") as fopen:
+        towns = fopen.readlines()
+    return towns

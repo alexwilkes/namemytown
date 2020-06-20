@@ -13,6 +13,7 @@ from scraper import (
     france_towns_url,
     germany_towns_url,
     fetch_list_germany,
+    read_local_list,
 )
 
 main_path = os.path.dirname(os.path.abspath(__file__))
@@ -37,13 +38,7 @@ def pad_left(prompt):
         return ("1" * (3-len(prompt))) + prompt
 
 
-def read_local_list(country):
-    with open(main_path+"/townlists/"+country+".txt", "r") as fopen:
-        towns = fopen.readlines()
-    return towns
-
-
-go_external = False
+go_external = False  # Toggle between scraping training data and using locally cached versions
 if go_external:
     print("Downloading fresh external town lists")
     town_lists = {
@@ -51,6 +46,7 @@ if go_external:
         "england": fetch_list_england(english_towns_url),
         "us": fetch_data_britannica(us_towns_url),
         "france": fetch_data_britannica(france_towns_url),
+        #  TODO: Scotland needs a scraper
     }
 
 else:
