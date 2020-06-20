@@ -36,12 +36,33 @@ def pad_left(prompt):
         return ("1" * (3-len(prompt))) + prompt
 
 
-models = {
-    "germany": TownLearner(fetch_list_germany(germany_towns_url)),
-    "england": TownLearner(fetch_list_england(english_towns_url)),
-    "us": TownLearner(fetch_data_britannica(us_towns_url)),
-    "france": TownLearner(fetch_data_britannica(france_towns_url)),
-}
+def read_local_list(country):
+    with open(country+".txt", "r") as fopen:
+        towns = fopen.readlines()
+    return towns
+
+
+go_external = False
+if go_external:
+    print("Downloading fresh external town lists")
+    town_lists = {
+        "germany": fetch_list_germany(germany_towns_url),
+        "england": fetch_list_england(english_towns_url),
+        "us": fetch_data_britannica(us_towns_url),
+        "france": fetch_data_britannica(france_towns_url),
+    }
+
+    # Recreate the locally stored town versions from those downloaded
+    for country in town_lists.keys():
+        with open(country+".txt", "w") as fopen:
+            fopen.writelines([line + "\n" for line in town_lists[country]])
+        fopen.close()
+
+else:
+    print("Using locally stored town lists")
+    town_lists = {country: read_local_list(country) for country in ["germany", "england", "us", "france"]}
+
+models = {town: TownLearner(town_lists[town]) for town in town_lists.keys()}
 
 for model in models.keys():
     models[model].fit()

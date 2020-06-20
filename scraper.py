@@ -1,4 +1,3 @@
-import pickle
 import requests
 from bs4 import BeautifulSoup
 
@@ -49,7 +48,7 @@ germany_towns_url = "https://en.wikipedia.org/wiki/List_of_cities_and_towns_in_G
 fetch_list_germany(germany_towns_url)
 
 
-def fetch_data_britannica(url):
+def fetch_data_britannica(url, get_fresh=False):
     page = requests.get(url).text
     soup = BeautifulSoup(page, "lxml")
     statelists = [state.findAll("a") for state in soup.findAll("ul", {"class": "topic-list"})]
