@@ -22,7 +22,10 @@ app.config.from_object(Config)
 
 class PromptForm(FlaskForm):
     prompt = StringField("It works best when you give it a few letters to start with...")
-    submit = SubmitField('Name my town!')
+    submit_england = SubmitField('Name my English town!')
+    submit_france = SubmitField('Name my French town!')
+    submit_germany = SubmitField('Name my German town!')
+    submit_us = SubmitField('Name my US town!')
 
 
 def pad_left(prompt):
@@ -33,23 +36,29 @@ def pad_left(prompt):
         return ("1" * (3-len(prompt))) + prompt
 
 
-# We must assign the right training list according to the ENV COUNTRY variable
-country_town_names_dict = {
-    "GERMANY": fetch_list_germany(germany_towns_url),
-    "ENGLISH": fetch_list_england(english_towns_url),
-    "US": fetch_data_britannica(us_towns_url),
-    "FRANCE": fetch_data_britannica(france_towns_url),
+models = {
+    "germany": TownLearner(fetch_list_germany(germany_towns_url)),
+    "england": TownLearner(fetch_list_england(english_towns_url)),
+    "us": TownLearner(fetch_data_britannica(us_towns_url)),
+    "france": TownLearner(fetch_data_britannica(france_towns_url)),
 }
 
-country = os.environ["COUNTRY"]
-model = TownLearner(country_town_names_dict[country])
-model.fit()
+for model in models.keys():
+    models[model].fit()
 
 
 # The only page we serve
 @app.route('/', methods=['GET', 'POST'])
 def home():
     prompt = request.args.get('prompt')
+
+    # Iterates through the arguments until it finds the country button pressed
+    country = "england"  # default
+    for arg in request.args:
+        if arg[:7] == 'submit_':
+            country = arg[7:]
+
+    model = models[country]
 
     if prompt is not None:
         placeholder = model.generate_n_towns(pad_left(prompt))
