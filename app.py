@@ -1,7 +1,6 @@
 from config import Config
 from flask import Flask, request, render_template
 from flask_wtf import FlaskForm
-import os
 from wtforms import StringField, SubmitField
 
 from townlearner import TownLearner
@@ -16,7 +15,7 @@ from scraper import (
 )
 
 
-app = Flask("namemytown")
+app = Flask("namemytown", template_folder="/home/alexwilkes/namemytown/templates")
 app.config.from_object(Config)
 
 
