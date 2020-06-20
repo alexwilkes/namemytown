@@ -1,5 +1,9 @@
+import os
 import requests
 from bs4 import BeautifulSoup
+
+
+main_path = os.path.dirname(os.path.abspath(__file__))
 
 
 def fetch_list_england(url):
