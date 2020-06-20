@@ -2,6 +2,7 @@ from config import Config
 from flask import Flask, request, render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
+import os
 
 from townlearner import TownLearner
 from scraper import (
@@ -14,8 +15,8 @@ from scraper import (
     fetch_list_germany,
 )
 
-
-app = Flask("namemytown", template_folder="/home/alexwilkes/namemytown/templates")
+main_path = os.path.dirname(os.path.abspath(__file__))
+app = Flask("namemytown", template_folder=main_path+"/templates")
 app.config.from_object(Config)
 
 
@@ -25,6 +26,7 @@ class PromptForm(FlaskForm):
     submit_france = SubmitField('Name my French town!')
     submit_germany = SubmitField('Name my German town!')
     submit_us = SubmitField('Name my US town!')
+    submit_scotland = SubmitField('Name my Scottish town!')
 
 
 def pad_left(prompt):
@@ -36,7 +38,7 @@ def pad_left(prompt):
 
 
 def read_local_list(country):
-    with open("/home/alexwilkes/namemytown/townlists/"+country+".txt", "r") as fopen:
+    with open(main_path+"/townlists/"+country+".txt", "r") as fopen:
         towns = fopen.readlines()
     return towns
 
