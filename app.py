@@ -37,7 +37,7 @@ def pad_left(prompt):
 
 
 def read_local_list(country):
-    with open("~/namemytown/"+country+".txt", "r") as fopen:
+    with open("/home/alexwilkes/namemytown/townlists/"+country+".txt", "r") as fopen:
         towns = fopen.readlines()
     return towns
 
@@ -51,12 +51,6 @@ if go_external:
         "us": fetch_data_britannica(us_towns_url),
         "france": fetch_data_britannica(france_towns_url),
     }
-
-    # Recreate the locally stored town versions from those downloaded
-    for country in town_lists.keys():
-        with open(country+".txt", "w") as fopen:
-            fopen.writelines([line + "\n" for line in town_lists[country]])
-        fopen.close()
 
 else:
     print("Using locally stored town lists")
