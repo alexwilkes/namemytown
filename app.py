@@ -53,7 +53,7 @@ if go_external:
 
 else:
     print("Using locally stored town lists")
-    town_lists = {country: read_local_list(country) for country in ["germany", "england", "us", "france"]}
+    town_lists = {country: read_local_list(country) for country in ["germany", "england", "us", "france", "scotland"]}
 
 models = {town: TownLearner(town_lists[town]) for town in town_lists.keys()}
 
