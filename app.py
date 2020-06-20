@@ -37,7 +37,7 @@ def pad_left(prompt):
 
 
 def read_local_list(country):
-    with open("~/namemytown/country+".txt", "r") as fopen:
+    with open("~/namemytown/"+country+".txt", "r") as fopen:
         towns = fopen.readlines()
     return towns
 
